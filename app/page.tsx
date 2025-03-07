@@ -1,101 +1,95 @@
+"use client";
+import { motion } from "framer-motion";
 import Image from "next/image";
+import step1Image from "@/public/step1.png"; // Replace with your actual image paths
+import step2Image from "@/public/step2.png";
+import step3Image from "@/public/step3.png";
+import {
+  SiGooglechrome,
+  SiFirefox,
+  SiSafari,
+  SiOpera,
+  SiBrave,
+  SiVivaldi,
+} from "react-icons/si";
+import { FaEdge, FaInternetExplorer } from "react-icons/fa";
 
+const apps = [
+  { name: "Chrome", icon: SiGooglechrome },
+  { name: "Firefox", icon: SiFirefox },
+  { name: "Safari", icon: SiSafari },
+  { name: "Opera", icon: SiOpera },
+  { name: "Edge", icon: FaEdge },
+  { name: "Brave", icon: SiBrave },
+  { name: "Vivaldi", icon: SiVivaldi },
+  { name: "Internet Explorer", icon: FaInternetExplorer },
+];
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+      <div>
+        <div className="relative min-h-screen my-10 flex flex-col justify-center items-center bg-gradient-to-r from-indigo-100 to-blue-200">
+          <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]">
+            <div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_500px_at_50%_200px,#C9EBFF,transparent)] opacity-60"></div>
+          </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          <div className="flex flex-col justify-center items-center text-center relative z-10 space-y-6">
+            <motion.h1
+              className="text-5xl font-extrabold text-slate-800 plus-jakarta-sans-800 max-w-2xl mx-auto leading-tight"
+              initial={{ opacity: 0, y: -50 }} // Starting state
+              animate={{ opacity: 1, y: 0 }} // End state
+              transition={{ duration: 1, ease: "easeOut" }} // Animation duration and easing
+            >
+              Get Resumes, CVs, and More in No Time!
+            </motion.h1>
+
+            <motion.p
+              className="text-lg text-gray-700 inter-200 max-w-md mx-auto"
+              initial={{ opacity: 0, x: -50 }} // Starting state
+              animate={{ opacity: 1, x: 0 }} // End state
+              transition={{ duration: 1, delay: 0.3, ease: "easeOut" }} // Animation duration and easing
+            >
+              Check out this little AI and create your professional documents in
+              a snap.
+            </motion.p>
+
+            <motion.button
+              className="mt-8 px-6 py-3 text-lg font-semibold text-white bg-blue-500/45 rounded-lg shadow-md transform hover:scale-105 transition duration-300 ease-in-out"
+              initial={{ opacity: 0, scale: 0.8 }} // Starting state
+              animate={{ opacity: 1, scale: 1 }} // End state
+              transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }} // Animation duration and easing
+            >
+              Get Started!
+            </motion.button>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        <div className="bg-sky-600 text-white text-center p-6 min-h-full flex flex-col items-center">
+          <div className="max-w-3xl">
+            <h1 className="text-6xl font-bold mb-4 plus-jakarta-sans-800 mt-4">
+              Works Anywhere?
+            </h1>
+            <p className="text-lg mb-6 lexend-300">
+              Experience Nexus effortlessly on any major browser or platform—no
+              downloads required! Just click the button below and dive right in
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 justify-center items-center mb-6">
+              {apps.map((app, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col items-center mt-4 mb-4 m-2.5 p-2"
+                >
+                  <app.icon className="w-12 h-12 mb-2" />
+                  <span className="text-sm">{app.name}</span>
+                </div>
+              ))}
+            </div>
+            <p className="text-md text-slate-300 text-center lexend-400">
+              And <span className="text-blue-200"> Many more</span>—too many to
+              list them all here!
+            </p>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

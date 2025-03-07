@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+@for $weight from 100 through 900 {
+  .plus-jakarta-sans-#{$weight} {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: #{$weight};
+    font-style: normal;
+  }
+
+  .shantell-sans-#{$weight} {
+    font-family: "Shantell Sans", cursive;
+    font-optical-sizing: auto;
+    font-weight: #{$weight};
+    font-style: normal;
+    font-variation-settings: "BNCE" 0, "INFM" 0, "SPAC" 0;
+  }
+
+  .inter-#{$weight} {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: #{$weight};
+    font-style: normal;
+  }
+
+  .lexend-#{$weight} {
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: #{$weight};
+    font-style: normal;
+  }
+}
