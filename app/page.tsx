@@ -1,9 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import step1Image from "@/public/step1.png"; // Replace with your actual image paths
-import step2Image from "@/public/step2.png";
-import step3Image from "@/public/step3.png";
 import {
   SiGooglechrome,
   SiFirefox,
