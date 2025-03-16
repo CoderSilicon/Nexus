@@ -37,7 +37,7 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }} // End state
               transition={{ duration: 1, ease: "easeOut" }} // Animation duration and easing
             >
-              Get Resumes, CVs, and More in No Time!
+              Your Personal AI Coach and Career Guide
             </motion.h1>
 
             <motion.p
@@ -46,8 +46,8 @@ export default function Home() {
               animate={{ opacity: 1, x: 0 }} // End state
               transition={{ duration: 1, delay: 0.3, ease: "easeOut" }} // Animation duration and easing
             >
-              Check out this little AI and create your professional documents in
-              a snap.
+              Check out this little AI and create your interview experience at
+              next level in a snap. - Nexus
             </motion.p>
 
             <motion.button
@@ -84,6 +84,81 @@ export default function Home() {
               And <span className="text-blue-200"> Many more</span>—too many to
               list them all here!
             </p>
+          </div>
+        </div>
+      </div>
+      <div className="py-16 px-8 bg-gradient-to-r from-indigo-50 to-blue-100">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-center text-slate-800 mb-12 plus-jakarta-sans-800">
+            Powerful Features for Your Career Growth
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "AI-Optimized Resumes",
+                description:
+                  "Smart resume enhancement with industry-specific keywords and formatting",
+                icon: "📄",
+              },
+              {
+                title: "Career Path Analysis",
+                description:
+                  "Data-driven insights for optimal career progression",
+                icon: "🎯",
+              },
+              {
+                title: "Interactive Charts",
+                description:
+                  "Visual representation of skill gaps and growth opportunities",
+                icon: "📊",
+              },
+              {
+                title: "Mock Interview AI",
+                description: "Practice interviews with real-time feedback",
+                icon: "🎙️",
+              },
+              {
+                title: "Skill Assessment",
+                description:
+                  "Comprehensive evaluation of technical and soft skills",
+                icon: "✅",
+              },
+              {
+                title: "Industry Trends",
+                description:
+                  "Real-time updates on market demands and emerging technologies",
+                icon: "📈",
+              },
+              {
+                title: "Personalized Learning",
+                description: "Customized learning paths based on your goals",
+                icon: "🎓",
+              },
+              {
+                title: "Network Analytics",
+                description: "Strategic insights for professional networking",
+                icon: "🤝",
+              },
+              {
+                title: "Smart Recommendations",
+                description: "AI-powered job and skill recommendations",
+                icon: "💡",
+              },
+            ].map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-white/80 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
+              >
+                <div className="text-4xl mb-4">{feature.icon}</div>
+                <h3 className="text-xl font-semibold text-slate-800 mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600">{feature.description}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>

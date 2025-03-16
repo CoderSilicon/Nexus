@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "./font.scss";
 import Navbar from "@/components/Navbar";
- "@/components/Navbar";
+("@/components/Navbar");
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Nexus",
-  description: "Your AI-powered resume builder",
+  description: "Your AI Coach and Career Guide",
 };
 
 export default function RootLayout({

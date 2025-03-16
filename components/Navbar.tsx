@@ -8,7 +8,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white shadow-md w-full sticky top-0 z-50">
-      <div className="container mx-auto flex justify-between items-center p-4 plus-jakarta-sans-400">
+      <div className="container mx-auto flex justify-between items-center p-4 lexend-400">
         <div className="text-xl font-bold justify-center items-center flex space-x-2">
           <Image src={logo} width={40} height={40} alt="Logo" />
           Nexus
@@ -25,8 +25,8 @@ const Navbar = () => {
           </a>
         </div>
         <div className="hidden md:flex">
-          <button className="px-4 py-2 border rounded-lg hover:bg-gray-100">
-            Sign In
+          <button className="px-4 py-2 border rounded-lg text-white bg-blue-600 hover:bg-blue-700">
+            Get Started
           </button>
         </div>
         <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
@@ -47,8 +47,8 @@ const Navbar = () => {
           <a href="#" className="hover:text-blue-600">
             Contact
           </a>
-          <button className="px-4 py-2 border rounded-lg hover:bg-gray-100">
-            Sign In
+          <button className="px-4 py-2 border rounded-lg text-white bg-blue-600 hover:bg-blue-700">
+            Get Started
           </button>
         </div>
       )}
