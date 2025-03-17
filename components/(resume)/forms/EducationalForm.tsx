@@ -56,7 +56,7 @@ const EducationalForm = ({ resumeData, setResumeData }: EditorFormProps) => {
   return (
     <div className="w-full max-w-xl mx-auto p-4 space-y-6">
       <div className="space-y-1.5 text-center">
-        <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+        <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl plus-jakarta-sans-400">
           Education
         </h2>
         <p className="text-sm text-muted-foreground sm:text-base">

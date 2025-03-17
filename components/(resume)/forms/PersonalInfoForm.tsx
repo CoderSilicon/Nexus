@@ -42,7 +42,9 @@ const PersonalInfoForm = ({ resumeData, setResumeData }: EditorFormProps) => {
     <>
       <div className="mx-auto max-w-xl space-y-6 my-6">
         <div className="space-y-1.5 text-center">
-          <h2 className="text-2xl font-semibold">Personal Info</h2>
+          <h2 className="text-2xl font-semibold plus-jakarta-sans-400">
+            Personal Info
+          </h2>
           <p className="text-sm text-muted-foreground">
             Tell us a bit about yourself
           </p>

@@ -42,7 +42,7 @@ const SkillsForm = ({ resumeData, setResumeData }: EditorFormProps) => {
     <>
       <div className="max-w-xl mx-auto space-y-6">
         <div className="space-y-1.5 text-center">
-          <h2 className="text-2xl font-semibold plus-jakarta-sans-4n00">
+          <h2 className="text-2xl font-semibold plus-jakarta-sans-400">
             Skills
           </h2>
           <p className="text-sm text-muted-foreground">What are you good at?</p>
