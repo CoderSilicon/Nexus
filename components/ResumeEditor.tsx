@@ -24,7 +24,7 @@ const ResumeForm = () => {
 
   return (
     <>
-      <div className="flex grow flex-col lexend-400 min-h-screen">
+      <div className="flex grow flex-col lexend-400  ">
         {/* Starting Section */}
         <div className="flex flex-col justify-center items-center p-4 md:my-8 gap-2">
           <h1 className="plus-jakarta-sans-800 text-2xl md:text-4xl font-bold text-center">
@@ -36,7 +36,7 @@ const ResumeForm = () => {
           </p>
         </div>
         {/* Main Section */}
-        <main className="grow px-4">
+        <main className="grow px-4 min-h-full">
           <div className="w-full flex items-center justify-center">
             <div className="w-full md:w-3/4 lg:w-1/2 p-3 overflow-y-auto flex flex-col gap-4">
               <div className="flex justify-center items-center my-3">
@@ -49,12 +49,14 @@ const ResumeForm = () => {
                   setCurrentStep={setStep}
                 />
               </div>
-              {FormComponent && (
-                <FormComponent
-                  resumeData={resumeData}
-                  setResumeData={setresumeData}
-                />
-              )}
+              <div className="overflow-y-auto max-h-[50vh]">
+                {FormComponent && (
+                  <FormComponent
+                    resumeData={resumeData}
+                    setResumeData={setresumeData}
+                  />
+                )}
+              </div>
             </div>
           </div>
         </main>
@@ -99,7 +101,7 @@ const ResumeForm = () => {
             </div>
             <div className="flex items-center gap-3 w-full sm:w-auto">
               <Button variant={"secondary"} className="w-full sm:w-auto">
-                <Link href="#">Close</Link>
+                <Link href="/dashboard">Close</Link>
               </Button>
             </div>
           </div>

@@ -29,9 +29,4 @@ export const faqs: FAQ[] = [
     answer:
       "Nexus tracks your performance across multiple practice interviews, providing detailed analytics and improvement suggestions. You can view your progress over time, identify areas for improvement, and receive AI-generated tips to enhance your interview skills based on your responses.",
   },
-  {
-    question: "Can I edit the AI-generated content?",
-    answer:
-      "Yes! While Nexus generates high-quality initial content, you have full control to edit and customize all generated resumes, cover letters, and other content. Our markdown editor makes it easy to refine the content to perfectly match your needs.",
-  },
 ];

@@ -26,7 +26,7 @@ export default function SubmitForm({
       setError(null);
 
       // Send the resume data to your API route
-      const response = await fetch("/api/AI", {
+      const response = await fetch("/api/generate-resume", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -67,14 +67,13 @@ export default function SubmitForm({
   return (
     <Card className="w-full max-w-2xl mx-auto mt-8">
       <CardHeader>
-        <CardTitle className="text-center plus-jakarta-sans-400">
+        <CardTitle className="text-center plus-jakarta-sans-400 text-2xl font-bold">
           Final Submission
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <Alert variant="destructive" className="mb-4">
-          <AlertTriangle className="h-10 w-10" />
-          <AlertDescription>
+          <AlertDescription className="text-center">
             This is the last page where all of the data is sent to AI and will
             be processed further. Please make sure everything is OK.
           </AlertDescription>
