@@ -42,10 +42,12 @@ const SkillsForm = ({ resumeData, setResumeData }: EditorFormProps) => {
     <>
       <div className="max-w-xl mx-auto space-y-6">
         <div className="space-y-1.5 text-center">
-          <h2 className="text-2xl font-semibold plus-jakarta-sans-400">
+          <h2 className="text-2xl font-semibold plus-jakarta-sans-400 dark:text-white">
             Skills
           </h2>
-          <p className="text-sm text-muted-foreground">What are you good at?</p>
+          <p className="text-sm text-muted-foreground dark:text-gray-400">
+            What are you good at?
+          </p>
         </div>
         <Form {...form}>
           <form className="space-y-3">
@@ -58,7 +60,7 @@ const SkillsForm = ({ resumeData, setResumeData }: EditorFormProps) => {
                   <FormControl>
                     <Textarea
                       {...field}
-                      className="w-full p-3 bg-white border border-gray-300 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                      className="w-full p-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm dark:text-white"
                       placeholder="e.g. React.js, Grpahic Designing, Marketing, ..."
                       onChange={(e) => {
                         const skills = e.target.value.split(",");
@@ -66,7 +68,7 @@ const SkillsForm = ({ resumeData, setResumeData }: EditorFormProps) => {
                       }}
                     />
                   </FormControl>
-                  <FormDescription>
+                  <FormDescription className="dark:text-gray-400">
                     Seperate each skill with comma
                   </FormDescription>
                   <FormMessage />

@@ -56,10 +56,10 @@ const EducationalForm = ({ resumeData, setResumeData }: EditorFormProps) => {
   return (
     <div className="w-full max-w-xl mx-auto p-4 space-y-6">
       <div className="space-y-1.5 text-center">
-        <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl plus-jakarta-sans-400">
+        <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl plus-jakarta-sans-400 dark:text-white">
           Education
         </h2>
-        <p className="text-sm text-muted-foreground sm:text-base">
+        <p className="text-sm text-muted-foreground sm:text-base dark:text-gray-400">
           Add as many educations as you like
         </p>
       </div>
@@ -83,7 +83,7 @@ const EducationalForm = ({ resumeData, setResumeData }: EditorFormProps) => {
           <div className="flex justify-center pt-2">
             <Button
               type="button"
-              className="w-full sm:w-auto"
+              className="w-full sm:w-auto dark:hover:bg-gray-700"
               onClick={() => {
                 append({
                   degree: "",
@@ -110,12 +110,12 @@ interface EducationItemProps {
 
 function EducationField({ form, index, remove }: EducationItemProps) {
   return (
-    <div className="space-y-3 sm:space-y-4 border rounded-md bg-background p-3 sm:p-4">
+    <div className="space-y-3 sm:space-y-4 border rounded-md bg-background p-3 sm:p-4 dark:border-gray-700 dark:bg-gray-800">
       <div className="flex justify-between items-center gap-2">
-        <span className="font-semibold text-sm sm:text-base">
+        <span className="font-semibold text-sm sm:text-base dark:text-white">
           Education {index + 1}
         </span>
-        <GripHorizontal className="size-4 sm:size-5 cursor-grab text-muted-foreground" />
+        <GripHorizontal className="size-4 sm:size-5 cursor-grab text-muted-foreground dark:text-gray-400" />
       </div>
 
       <FormField
@@ -123,15 +123,17 @@ function EducationField({ form, index, remove }: EducationItemProps) {
         name={`education.${index}.degree`}
         render={({ field }) => (
           <FormItem>
-            <FormLabel className="text-sm sm:text-base">Degree</FormLabel>
+            <FormLabel className="text-sm sm:text-base dark:text-gray-200">
+              Degree
+            </FormLabel>
             <FormControl>
               <Input
-                className="text-sm sm:text-base"
+                className="text-sm sm:text-base dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
                 placeholder="Bachelor of Science"
                 {...field}
               />
             </FormControl>
-            <FormMessage className="text-sm" />
+            <FormMessage className="text-sm dark:text-red-400" />
           </FormItem>
         )}
       />
@@ -141,15 +143,17 @@ function EducationField({ form, index, remove }: EducationItemProps) {
         name={`education.${index}.school`}
         render={({ field }) => (
           <FormItem>
-            <FormLabel className="text-sm sm:text-base">School</FormLabel>
+            <FormLabel className="text-sm sm:text-base dark:text-gray-200">
+              School
+            </FormLabel>
             <FormControl>
               <Input
-                className="text-sm sm:text-base"
+                className="text-sm sm:text-base dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
                 placeholder="University name"
                 {...field}
               />
             </FormControl>
-            <FormMessage className="text-sm" />
+            <FormMessage className="text-sm dark:text-red-400" />
           </FormItem>
         )}
       />
@@ -160,10 +164,12 @@ function EducationField({ form, index, remove }: EducationItemProps) {
           name={`education.${index}.startDate`}
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-sm sm:text-base">Start Date</FormLabel>
+              <FormLabel className="text-sm sm:text-base dark:text-gray-200">
+                Start Date
+              </FormLabel>
               <FormControl>
                 <Input
-                  className="text-sm sm:text-base"
+                  className="text-sm sm:text-base dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                   type="date"
                   onChange={(e) => {
                     const date = e.target.value
@@ -178,7 +184,7 @@ function EducationField({ form, index, remove }: EducationItemProps) {
                   }
                 />
               </FormControl>
-              <FormMessage className="text-sm" />
+              <FormMessage className="text-sm dark:text-red-400" />
             </FormItem>
           )}
         />
@@ -188,10 +194,12 @@ function EducationField({ form, index, remove }: EducationItemProps) {
           name={`education.${index}.endDate`}
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-sm sm:text-base">End Date</FormLabel>
+              <FormLabel className="text-sm sm:text-base dark:text-gray-200">
+                End Date
+              </FormLabel>
               <FormControl>
                 <Input
-                  className="text-sm sm:text-base"
+                  className="text-sm sm:text-base dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                   type="date"
                   onChange={(e) => {
                     const date = e.target.value
@@ -206,7 +214,7 @@ function EducationField({ form, index, remove }: EducationItemProps) {
                   }
                 />
               </FormControl>
-              <FormMessage className="text-sm" />
+              <FormMessage className="text-sm dark:text-red-400" />
             </FormItem>
           )}
         />
@@ -216,7 +224,7 @@ function EducationField({ form, index, remove }: EducationItemProps) {
         <Button
           type="button"
           variant="destructive"
-          className="text-sm sm:text-base"
+          className="text-sm sm:text-base dark:hover:bg-red-700"
           onClick={() => remove(index)}
         >
           Remove

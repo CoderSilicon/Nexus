@@ -7,7 +7,7 @@ import { steps } from "./(resume)/links";
 import Breadcrumbs from "./(resume)/Breadcrumbs";
 import { ResumeSchemaVals } from "@/lib/FormSchema";
 
-const ResumeForm = () => {
+const ResumeForm = (props: any) => {
   const [resumeData, setresumeData] = useState<ResumeSchemaVals>({});
   const searchParams = useSearchParams();
   const currentStep = searchParams.get("step") || steps[0].key;
@@ -24,85 +24,95 @@ const ResumeForm = () => {
 
   return (
     <>
-      <div className="flex grow flex-col lexend-400  ">
-        {/* Starting Section */}
-        <div className="flex flex-col justify-center items-center p-4 md:my-8 gap-2">
-          <h1 className="plus-jakarta-sans-800 text-2xl md:text-4xl font-bold text-center">
-            Design your Resume
-          </h1>
-          <p className="plus-jakarta-sans-400 text-base md:text-xl font-semibold text-center px-4">
-            Follow the steps below to create your resume. Your progress will be
-            saved automatically!
-          </p>
-        </div>
+      <div className="flex flex-col lexend-400 dark:bg-gray-900 min-h-screen justify-between pt-16  mt-10">
         {/* Main Section */}
-        <main className="grow px-4 min-h-full">
-          <div className="w-full flex items-center justify-center">
-            <div className="w-full md:w-3/4 lg:w-1/2 p-3 overflow-y-auto flex flex-col gap-4">
-              <div className="flex justify-center items-center my-3">
-                <Breadcrumbs
-                  steps={steps}
-                  currentstep={currentStep}
-                  onClick={(e) =>
-                    setStep((e.target as HTMLElement).dataset.key || "")
-                  }
-                  setCurrentStep={setStep}
+        <main className="grow px-3 sm:px-6 py-4 w-full">
+          <div className="w-full">
+            {/* Breadcrumbs - hidden on mobile, visible on lg screens */}
+            <div className="hidden lg:flex justify-center items-center mb-4">
+              <Breadcrumbs
+                steps={steps}
+                currentstep={currentStep}
+                onClick={(e) =>
+                  setStep((e.target as HTMLElement).dataset.key || "")
+                }
+                setCurrentStep={setStep}
+              />
+            </div>
+
+            {/* Step indicator for mobile */}
+            <div className="lg:hidden text-center mb-3">
+              <p className="text-sm font-medium dark:text-gray-300">
+                Step {steps.findIndex((step) => step.key === currentStep) + 1}
+                of {steps.length}
+              </p>
+              <h3 className="text-base font-bold dark:text-white">
+                {steps.find((step) => step.key === currentStep)?.title}
+              </h3>
+            </div>
+
+            <div className="overflow-y-auto h-[50vh] sm:h-[55vh] md:h-[60vh] dark:bg-gray-800 bg-white rounded-lg shadow-md p-4 border dark:border-gray-700 w-full sm:w-4/5 md:w-3/4 lg:w-3/5 mx-auto">
+              {FormComponent && (
+                <FormComponent
+                  resumeData={resumeData}
+                  setResumeData={setresumeData}
                 />
-              </div>
-              <div className="overflow-y-auto max-h-[50vh]">
-                {FormComponent && (
-                  <FormComponent
-                    resumeData={resumeData}
-                    setResumeData={setresumeData}
-                  />
-                )}
-              </div>
+              )}
             </div>
           </div>
         </main>
+
         {/* Footer Section */}
-        <footer className="border-t w-full p-4 md:px-12 md:py-5">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div className="flex items-center gap-3 w-full sm:w-auto">
-              <Button
-                variant={"secondary"}
-                className="w-full sm:w-auto"
-                onClick={() => {
-                  const currentIndex = steps.findIndex(
-                    (step) => step.key === currentStep
-                  );
-                  if (currentIndex > 0) {
-                    setStep(steps[currentIndex - 1].key);
+        <footer className="border-t dark:border-gray-700 w-full p-3 sm:p-4 mt-auto">
+          <div className="w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="flex items-center gap-2 w-full">
+                <Button
+                  variant={"secondary"}
+                  className="w-1/2 sm:w-auto text-xs sm:text-sm dark:bg-gray-700 dark:hover:bg-gray-600"
+                  onClick={() => {
+                    const currentIndex = steps.findIndex(
+                      (step) => step.key === currentStep
+                    );
+                    if (currentIndex > 0) {
+                      setStep(steps[currentIndex - 1].key);
+                    }
+                  }}
+                  disabled={
+                    steps.findIndex((step) => step.key === currentStep) === 0
                   }
-                }}
-                disabled={
-                  steps.findIndex((step) => step.key === currentStep) === 0
-                }
-              >
-                Previous Step
-              </Button>
-              <Button
-                className="w-full sm:w-auto"
-                onClick={() => {
-                  const currentIndex = steps.findIndex(
-                    (step) => step.key === currentStep
-                  );
-                  if (currentIndex < steps.length - 1) {
-                    setStep(steps[currentIndex + 1].key);
+                >
+                  Previous
+                </Button>
+                <Button
+                  className="w-1/2 sm:w-auto text-xs sm:text-sm"
+                  onClick={() => {
+                    const currentIndex = steps.findIndex(
+                      (step) => step.key === currentStep
+                    );
+                    if (currentIndex < steps.length - 1) {
+                      setStep(steps[currentIndex + 1].key);
+                    }
+                  }}
+                  disabled={
+                    steps.findIndex((step) => step.key === currentStep) ===
+                    steps.length - 1
                   }
-                }}
-                disabled={
-                  steps.findIndex((step) => step.key === currentStep) ===
-                  steps.length - 1
-                }
-              >
-                Next Step
-              </Button>
-            </div>
-            <div className="flex items-center gap-3 w-full sm:w-auto">
-              <Button variant={"secondary"} className="w-full sm:w-auto">
-                <Link href="/dashboard">Close</Link>
-              </Button>
+                >
+                  Next Step
+                </Button>
+              </div>
+              <div className="flex justify-start sm:justify-end w-full">
+                <Button
+                  onClick={() => {
+                    props.setEditor(!props.Editor);
+                  }}
+                  variant={"secondary"}
+                  className="w-full sm:w-auto text-xs sm:text-sm dark:bg-gray-700 dark:hover:bg-gray-600"
+                >
+                  Close
+                </Button>
+              </div>
             </div>
           </div>
         </footer>

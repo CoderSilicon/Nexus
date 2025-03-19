@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const HeroSection = () => {
   return (
-    <div className="relative min-h-screen py-16 flex flex-col justify-center items-center bg-gradient-to-r from-indigo-100 to-blue-200 dark:from-slate-900 dark:to-slate-800">
+    <div className="relative min-h-screen py-16 mt-10 flex flex-col justify-center items-center bg-gradient-to-r from-indigo-100 to-blue-200 dark:from-slate-900 dark:to-slate-800">
       <div className="absolute inset-0 -z-10 h-full w-full bg-white dark:bg-gray-900 bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#1f2937_1px,transparent_1px),linear-gradient(to_bottom,#1f2937_1px,transparent_1px)] bg-[size:6rem_4rem]">
         <div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_500px_at_50%_200px,#C9EBFF,transparent)] dark:bg-[radial-gradient(circle_500px_at_50%_200px,#1e3a8a,transparent)] opacity-60"></div>
       </div>

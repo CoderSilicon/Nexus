@@ -40,12 +40,12 @@ const PersonalInfoForm = ({ resumeData, setResumeData }: EditorFormProps) => {
   }, [form, resumeData, setResumeData]);
   return (
     <>
-      <div className="mx-auto max-w-xl space-y-6 my-6">
+      <div className="mx-auto max-w-xl space-y-6 my-6 dark:text-white">
         <div className="space-y-1.5 text-center">
-          <h2 className="text-2xl font-semibold plus-jakarta-sans-400">
+          <h2 className="text-2xl font-semibold plus-jakarta-sans-400 dark:text-white">
             Personal Info
           </h2>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground dark:text-gray-400">
             Tell us a bit about yourself
           </p>
         </div>
@@ -57,12 +57,18 @@ const PersonalInfoForm = ({ resumeData, setResumeData }: EditorFormProps) => {
               control={form.control}
               name="firstName"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>First Name</FormLabel>
+                <FormItem className="dark:text-white">
+                  <FormLabel className="dark:text-gray-200">
+                    First Name
+                  </FormLabel>
                   <FormControl>
-                    <Input placeholder="John" {...field} />
+                    <Input
+                      placeholder="John"
+                      {...field}
+                      className="dark:bg-gray-800 dark:text-white dark:border-gray-700"
+                    />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="dark:text-red-400" />
                 </FormItem>
               )}
             />
@@ -70,12 +76,18 @@ const PersonalInfoForm = ({ resumeData, setResumeData }: EditorFormProps) => {
               control={form.control}
               name="lastName"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Last Name</FormLabel>
+                <FormItem className="dark:text-white">
+                  <FormLabel className="dark:text-gray-200">
+                    Last Name
+                  </FormLabel>
                   <FormControl>
-                    <Input placeholder="Doe" {...field} />
+                    <Input
+                      placeholder="Doe"
+                      {...field}
+                      className="dark:bg-gray-800 dark:text-white dark:border-gray-700"
+                    />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="dark:text-red-400" />
                 </FormItem>
               )}
             />
@@ -85,12 +97,18 @@ const PersonalInfoForm = ({ resumeData, setResumeData }: EditorFormProps) => {
               control={form.control}
               name="jobTitle"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Job Title</FormLabel>
+                <FormItem className="dark:text-white">
+                  <FormLabel className="dark:text-gray-200">
+                    Job Title
+                  </FormLabel>
                   <FormControl>
-                    <Input placeholder="Software Engineer" {...field} />
+                    <Input
+                      placeholder="Software Engineer"
+                      {...field}
+                      className="dark:bg-gray-800 dark:text-white dark:border-gray-700"
+                    />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="dark:text-red-400" />
                 </FormItem>
               )}
             />
@@ -98,12 +116,16 @@ const PersonalInfoForm = ({ resumeData, setResumeData }: EditorFormProps) => {
               control={form.control}
               name="city"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>City</FormLabel>
+                <FormItem className="dark:text-white">
+                  <FormLabel className="dark:text-gray-200">City</FormLabel>
                   <FormControl>
-                    <Input placeholder="New York" {...field} />
+                    <Input
+                      placeholder="New York"
+                      {...field}
+                      className="dark:bg-gray-800 dark:text-white dark:border-gray-700"
+                    />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="dark:text-red-400" />
                 </FormItem>
               )}
             />
@@ -111,12 +133,16 @@ const PersonalInfoForm = ({ resumeData, setResumeData }: EditorFormProps) => {
               control={form.control}
               name="country"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Country</FormLabel>
+                <FormItem className="dark:text-white">
+                  <FormLabel className="dark:text-gray-200">Country</FormLabel>
                   <FormControl>
-                    <Input placeholder="United States" {...field} />
+                    <Input
+                      placeholder="United States"
+                      {...field}
+                      className="dark:bg-gray-800 dark:text-white dark:border-gray-700"
+                    />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="dark:text-red-400" />
                 </FormItem>
               )}
             />
@@ -124,12 +150,16 @@ const PersonalInfoForm = ({ resumeData, setResumeData }: EditorFormProps) => {
               control={form.control}
               name="phone"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Phone</FormLabel>
+                <FormItem className="dark:text-white">
+                  <FormLabel className="dark:text-gray-200">Phone</FormLabel>
                   <FormControl>
-                    <Input placeholder="+1 234 567 890" {...field} />
+                    <Input
+                      placeholder="+1 234 567 890"
+                      {...field}
+                      className="dark:bg-gray-800 dark:text-white dark:border-gray-700"
+                    />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="dark:text-red-400" />
                 </FormItem>
               )}
             />
@@ -137,16 +167,17 @@ const PersonalInfoForm = ({ resumeData, setResumeData }: EditorFormProps) => {
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
+                <FormItem className="dark:text-white">
+                  <FormLabel className="dark:text-gray-200">Email</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="john@example.com"
                       type="email"
                       {...field}
+                      className="dark:bg-gray-800 dark:text-white dark:border-gray-700"
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="dark:text-red-400" />
                 </FormItem>
               )}
             />

@@ -39,12 +39,12 @@ const WorkExperienceForm = ({ resumeData, setResumeData }: EditorFormProps) => {
     name: "workExperience",
   });
   return (
-    <div className="max-w-xl mx-auto space-y-6">
+    <div className="max-w-xl mx-auto space-y-6 dark:text-white">
       <div className="space-y-1.5 text-center">
-        <h2 className="text-2xl font-semibold plus-jakarta-sans-400">
+        <h2 className="text-2xl font-semibold plus-jakarta-sans-400 dark:text-white">
           Work Experience{" "}
         </h2>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-muted-foreground dark:text-gray-400">
           Add as many work experiences as you like
         </p>
       </div>
@@ -67,7 +67,6 @@ const WorkExperienceForm = ({ resumeData, setResumeData }: EditorFormProps) => {
                   company: "",
                   startDate: "" as any,
                   endDate: "" as any,
-
                   description: "",
                 });
               }}
@@ -89,19 +88,26 @@ interface WorkExperienceItemProps {
 
 function WorkExperienceItem({ form, index, remove }: WorkExperienceItemProps) {
   return (
-    <div className="space-y-3 border rounded-md bg-background p-3">
+    <div className="space-y-3 border rounded-md bg-background p-3 dark:bg-gray-800 dark:border-gray-700">
       <div className="flex justify-between gap-2">
-        <span className="font-semibold">Work Experience {index + 1}</span>
-        <GripHorizontal className="size-5 cursor-grab text-muted-foreground" />
+        <span className="font-semibold dark:text-white">
+          Work Experience {index + 1}
+        </span>
+        <GripHorizontal className="size-5 cursor-grab text-muted-foreground dark:text-gray-400" />
       </div>
       <FormField
         control={form.control}
         name={`workExperience.${index}.position`}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Job Title</FormLabel>
+            <FormLabel className="dark:text-gray-200">Job Title</FormLabel>
             <FormControl>
-              <Input placeholder="Software Engineer" {...field} autoFocus />
+              <Input
+                placeholder="Software Engineer"
+                {...field}
+                autoFocus
+                className="dark:bg-gray-700 dark:text-white dark:border-gray-600"
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -112,71 +118,81 @@ function WorkExperienceItem({ form, index, remove }: WorkExperienceItemProps) {
         name={`workExperience.${index}.company`}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Company</FormLabel>
+            <FormLabel className="dark:text-gray-200">Company</FormLabel>
             <FormControl>
-              <Input placeholder="Google" {...field} />
+              <Input
+                placeholder="Google"
+                {...field}
+                className="dark:bg-gray-700 dark:text-white dark:border-gray-600"
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
         )}
       />
-      <div className="grid grid-cols-2 gap-3">
-        <FormField
-          control={form.control}
-          name={`workExperience.${index}.startDate`}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Start Date</FormLabel>
-              <FormControl>
-                <Input
-                  type="date"
-                  {...field}
-                  value={
-                    field.value
-                      ? new Date(field.value).toISOString().split("T")[0]
-                      : ""
-                  }
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      <div className="grid grid-cols-2 gap-3"></div>
+      <FormField
+        control={form.control}
+        name={`workExperience.${index}.startDate`}
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel className="dark:text-gray-200">Start Date</FormLabel>
+            <FormControl>
+              <Input
+                type="date"
+                {...field}
+                className="dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                value={
+                  field.value
+                    ? new Date(field.value).toISOString().split("T")[0]
+                    : ""
+                }
+              />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
 
-        <FormField
-          control={form.control}
-          name={`workExperience.${index}.endDate`}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>End Date</FormLabel>
-              <FormControl>
-                <Input
-                  type="date"
-                  {...field}
-                  value={
-                    field.value
-                      ? new Date(field.value).toISOString().split("T")[0]
-                      : ""
-                  }
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </div>{" "}
-      <FormDescription>
-        Leave <span className="font-semibold">End Date</span> empty if u are
-        currently working here
+      <FormField
+        control={form.control}
+        name={`workExperience.${index}.endDate`}
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel className="dark:text-gray-200">End Date</FormLabel>
+            <FormControl>
+              <Input
+                type="date"
+                {...field}
+                className="dark:bg-gray-700 dark:text-white dark:border-gray-600"
+                value={
+                  field.value
+                    ? new Date(field.value).toISOString().split("T")[0]
+                    : ""
+                }
+              />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+      <FormDescription className="dark:text-gray-400">
+        Leave <span className="font-semibold dark:text-gray-300">End Date</span>{" "}
+        empty if u are currently working here
       </FormDescription>
       <FormField
         control={form.control}
         name={`workExperience.${index}.description`}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Description</FormLabel>
+            <FormLabel className="dark:text-gray-200">Description</FormLabel>
             <FormControl>
-              <textarea placeholder="Describe your role" {...field} />
+              <textarea
+                placeholder="Describe your role"
+                {...field}
+                className="dark:bg-gray-700 dark:text-white dark:border-gray-600"
+              />
             </FormControl>
             <FormMessage />
           </FormItem>

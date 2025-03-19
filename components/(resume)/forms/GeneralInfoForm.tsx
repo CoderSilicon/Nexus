@@ -38,12 +38,12 @@ const GeneralInfoForm = ({ resumeData, setResumeData }: EditorFormProps) => {
   }, [form, resumeData, setResumeData]);
 
   return (
-    <div className="max-w-xl mx-auto space-y-6">
+    <div className="max-w-xl mx-auto space-y-6 dark:text-white">
       <div className="space-y-1 5 text-center">
-        <h2 className="text-2xl font-semibold plus-jakarta-sans-400">
+        <h2 className="text-2xl font-semibold plus-jakarta-sans-400 dark:text-white">
           General Info
         </h2>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-muted-foreground dark:text-gray-400">
           This will not appear in your resume
         </p>
       </div>
@@ -54,17 +54,19 @@ const GeneralInfoForm = ({ resumeData, setResumeData }: EditorFormProps) => {
             name="title"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Title</FormLabel>
+                <FormLabel className="dark:text-gray-200">Title</FormLabel>
                 <FormControl>
                   <Input
                     {...field}
                     placeholder="Title"
-                    className="p-2"
+                    className="p-2 dark:bg-gray-800 dark:text-white dark:border-gray-700"
                     autoFocus
                   />
                 </FormControl>
-                <FormDescription>Give your resume a title</FormDescription>
-                <FormMessage />
+                <FormDescription className="dark:text-gray-400">
+                  Give your resume a title
+                </FormDescription>
+                <FormMessage className="dark:text-red-400" />
               </FormItem>
             )}
           />
@@ -73,14 +75,20 @@ const GeneralInfoForm = ({ resumeData, setResumeData }: EditorFormProps) => {
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Description</FormLabel>
+                <FormLabel className="dark:text-gray-200">
+                  Description
+                </FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="Description" className="p-2" />
+                  <Input
+                    {...field}
+                    placeholder="Description"
+                    className="p-2 dark:bg-gray-800 dark:text-white dark:border-gray-700"
+                  />
                 </FormControl>
-                <FormDescription>
+                <FormDescription className="dark:text-gray-400">
                   Description what is this resume for?
                 </FormDescription>
-                <FormMessage />
+                <FormMessage className="dark:text-red-400" />
               </FormItem>
             )}
           />

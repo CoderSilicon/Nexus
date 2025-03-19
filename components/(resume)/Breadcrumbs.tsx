@@ -23,16 +23,19 @@ const ResumeBreadcrumb: React.FC<BreadcrumbsProps> = ({
   setCurrentStep,
 }) => {
   return (
-    <Breadcrumb>
-      <BreadcrumbList>
+    <Breadcrumb className="">
+      <BreadcrumbList className="dark:text-gray-200">
         {steps.map((step, index) => (
           <React.Fragment key={step.key}>
             <BreadcrumbItem>
               {step.key === currentstep ? (
-                <BreadcrumbPage>{step.title}</BreadcrumbPage>
+                <BreadcrumbPage className="dark:text-white">
+                  {step.title}
+                </BreadcrumbPage>
               ) : (
                 <BreadcrumbLink asChild>
                   <button
+                    className="dark:text-gray-300 dark:hover:text-white"
                     onClick={() => {
                       setCurrentStep(step.key);
                     }}
@@ -42,7 +45,9 @@ const ResumeBreadcrumb: React.FC<BreadcrumbsProps> = ({
                 </BreadcrumbLink>
               )}
             </BreadcrumbItem>
-            {index < steps.length - 1 && <BreadcrumbSeparator />}
+            {index < steps.length - 1 && (
+              <BreadcrumbSeparator className="dark:text-gray-400" />
+            )}
           </React.Fragment>
         ))}
       </BreadcrumbList>

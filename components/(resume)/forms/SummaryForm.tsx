@@ -35,12 +35,12 @@ const SummaryForm = ({ resumeData, setResumeData }: EditorFormProps) => {
 
   return (
     <>
-      <div className="max-w-xl space-y-6 mx-auto">
+      <div className="max-w-xl space-y-6 mx-auto dark:text-white">
         <div className="space-y-1.5 text-center">
-          <h2 className="text-2xl font-semibold plus-jakarta-sans-400">
+          <h2 className="text-2xl font-semibold plus-jakarta-sans-400 dark:text-white">
             Profesional Summary
           </h2>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground dark:text-gray-400">
             Write a short introduction on your resume or the let the ai generate
             one from your entered Data.
           </p>
@@ -52,14 +52,15 @@ const SummaryForm = ({ resumeData, setResumeData }: EditorFormProps) => {
               name="summary"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel> Summary</FormLabel>
+                  <FormLabel className="dark:text-gray-200">Summary</FormLabel>
                   <FormControl>
                     <Textarea
                       {...field}
-                      placeholder="A brief, engaging teet about yourself"
+                      placeholder="A brief, engaging text about yourself"
+                      className="dark:bg-gray-800 dark:text-white dark:border-gray-700"
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="dark:text-red-400" />
                 </FormItem>
               )}
             />

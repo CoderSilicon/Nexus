@@ -65,36 +65,44 @@ export default function SubmitForm({
   };
 
   return (
-    <Card className="w-full max-w-2xl mx-auto mt-8">
+    <Card className="w-full max-w-2xl mx-auto mt-8 dark:bg-gray-800 dark:border-gray-700">
       <CardHeader>
-        <CardTitle className="text-center plus-jakarta-sans-400 text-2xl font-bold">
+        <CardTitle className="text-center plus-jakarta-sans-400 text-2xl font-bold dark:text-white">
           Final Submission
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
-        <Alert variant="destructive" className="mb-4">
-          <AlertDescription className="text-center">
+        <Alert
+          variant="destructive"
+          className="mb-4 dark:bg-red-900 dark:border-red-800"
+        >
+          <AlertDescription className="text-center dark:text-gray-200">
             This is the last page where all of the data is sent to AI and will
             be processed further. Please make sure everything is OK.
           </AlertDescription>
         </Alert>
 
         {error && (
-          <Alert variant="destructive" className="mb-4">
+          <Alert
+            variant="destructive"
+            className="mb-4 dark:bg-red-900 dark:border-red-800"
+          >
             <AlertTriangle className="h-5 w-5 mr-2" />
-            <AlertDescription>{error}</AlertDescription>
+            <AlertDescription className="dark:text-gray-200">
+              {error}
+            </AlertDescription>
           </Alert>
         )}
 
         <div className="text-center space-y-6">
-          <div className="flex items-center justify-center space-x-2 text-xl font-medium">
+          <div className="flex items-center justify-center space-x-2 text-xl font-medium dark:text-white">
             <Rocket className="h-5 w-5" />
             <span>Get ready to release it in AI&apos;s hands!</span>
           </div>
 
           <Button
             size="lg"
-            className="w-full max-w-xs"
+            className="w-full max-w-xs dark:hover:bg-primary/90"
             onClick={handleSubmit}
             disabled={isSubmitting}
           >
@@ -112,7 +120,7 @@ export default function SubmitForm({
             <Button
               variant="outline"
               size="sm"
-              className="mt-2"
+              className="mt-2 dark:border-gray-600 dark:hover:bg-gray-700"
               onClick={() => {
                 const a = document.createElement("a");
                 a.href = downloadUrl;
