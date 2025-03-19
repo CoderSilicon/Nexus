@@ -5,49 +5,78 @@ import { useUser } from "@clerk/nextjs";
 import { motion } from "framer-motion";
 import {
   FileText,
-  User,
   Home,
   Settings,
-  Bell,
   Search,
   Code,
   BookOpen,
   Globe,
   Briefcase,
-  Download,
   FileQuestion,
-  Lightbulb,
   Compass,
-  Palette,
   Zap,
   MessageSquare,
   HelpCircle,
-  LogOut,
-  ExternalLink,
-  Copy,
-  CheckCircle,
   ChevronRight,
+  Send,
+  ArrowUp,
+  Calendar,
+  Trophy,
+  Star,
+  Video,
 } from "lucide-react";
-import { useState } from "react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { useState, useEffect } from "react";
+
 import Link from "next/link";
 
 export default function DashboardPage() {
   const { user } = useUser();
   const [activeCategory, setActiveCategory] = useState("all");
-  const [copiedTemplate, setCopiedTemplate] = useState<string | null>(null);
   const [isCollapsed, setIsCollapsed] = useState(false);
+  interface Activity {
+    title: string;
+    type: string;
+    timestamp: string;
+  }
+
+  const [recentActivities, setRecentActivities] = useState<Activity[]>([]);
 
   if (!user) {
     redirect("/");
   }
 
   const username = user.username || "User";
+
+  // Load activities from localStorage on component mount
+  useEffect(() => {
+    const storedActivities = JSON.parse(
+      localStorage.getItem("recentActivities") || "[]"
+    );
+    setRecentActivities(storedActivities);
+  }, []);
+
+  // Function to track new activity
+  const trackActivity = (toolName: string, toolType: string) => {
+    const newActivity = {
+      title: `Used ${toolName}`,
+      type: toolType,
+      timestamp: new Date().toISOString(),
+    };
+
+    // Get current activities
+    const currentActivities = JSON.parse(
+      localStorage.getItem("recentActivities") || "[]"
+    );
+
+    // Add new activity at the beginning
+    const updatedActivities = [newActivity, ...currentActivities].slice(0, 10); // Keep only 10 most recent
+
+    // Update localStorage
+    localStorage.setItem("recentActivities", JSON.stringify(updatedActivities));
+
+    // Update state
+    setRecentActivities(updatedActivities);
+  };
 
   // Animation variants
   const containerVariants = {
@@ -72,7 +101,6 @@ export default function DashboardPage() {
 
   // Tool categories
   const categories = [
-    { id: "all", name: "All Tools", href: "/dashboard" },
     { id: "resume", name: "Resume", href: "/dashboard/resume" },
     { id: "interview", name: "Interview", href: "/dashboard/interview-prep" },
     { id: "learning", name: "Learning", href: "/dashboard/learning" },
@@ -135,13 +163,8 @@ export default function DashboardPage() {
     },
   ];
 
-  const handleCopyTemplate = (id: string) => {
-    setCopiedTemplate(id);
-    setTimeout(() => setCopiedTemplate(null), 2000);
-  };
-
   return (
-    <div className="flex h-screen bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+    <div className="flex min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 ">
       {/* Sidebar */}
       <motion.aside
         initial={{ x: -100, opacity: 0 }}
@@ -149,7 +172,7 @@ export default function DashboardPage() {
         transition={{ duration: 0.5 }}
         className={`${
           isCollapsed ? "w-20" : "w-64"
-        } hidden md:flex flex-col bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 relative`}
+        } hidden lg:flex flex-col bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 relative`}
       >
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
@@ -161,22 +184,6 @@ export default function DashboardPage() {
             }`}
           />
         </button>
-
-        <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-          <motion.div
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center justify-center"
-          >
-            <div className="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-xl">
-              {username?.charAt(0) || "U"}
-            </div>
-            {!isCollapsed && (
-              <span className="ml-2 font-semibold text-lg">Career Toolkit</span>
-            )}
-          </motion.div>
-        </div>
 
         <div className="flex-1 p-4 space-y-1">
           <motion.div
@@ -190,12 +197,13 @@ export default function DashboardPage() {
           </motion.div>
 
           {categories.map((category) => (
-            <Link key={category.id} href={`./${category.href}`}>
+            <Link key={category.id} href={category.href}>
               <motion.div
                 whileHover={{ x: 5 }}
                 className={`flex items-center px-4 py-3 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700/50 rounded-lg cursor-pointer ${
                   isCollapsed ? "justify-center" : ""
                 }`}
+                onClick={() => trackActivity(category.name, category.id)}
               >
                 {category.id === "resume" && <FileText className="h-5 w-5" />}
                 {category.id === "interview" && (
@@ -241,67 +249,34 @@ export default function DashboardPage() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
-        <motion.header
-          initial={{ y: -50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-4 flex items-center justify-between"
-        >
-          <div className="flex items-center">
-            <h1 className="text-xl font-semibold">Welcome, {username}!</h1>
-          </div>
-
-          <div className="flex items-center space-x-4">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search tools..."
-                className="pl-9 pr-4 py-2 rounded-full bg-gray-100 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
-            </div>
-
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="relative p-2 rounded-full bg-gray-100 dark:bg-gray-700"
-            >
-              <Bell className="h-5 w-5" />
-            </motion.button>
-
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              className="h-9 w-9 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold"
-            >
-              {username?.charAt(0) || "U"}
-            </motion.div>
-          </div>
-        </motion.header>
 
         {/* Dashboard Content */}
         <main className="flex-1 overflow-y-auto p-6 bg-gray-50 dark:bg-gray-900">
+          {/* Welcome Banner */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-8"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-2xl font-bold mb-2">
+                  Welcome back, {username}!
+                </h1>
+                <p className="text-gray-600 dark:text-gray-300">
+                  Here's what's happening with your job search today.
+                </p>
+              </div>
+              <div className="hidden md:block">
+                <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full">
+                  <Home className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                </div>
+              </div>
+            </div>
+          </motion.div>
           {/* Tool Categories */}
           <div className="mb-8">
-            <h2 className="text-2xl font-bold mb-4">
-              Career Tools & Resources
-            </h2>
-            <div className="flex flex-wrap gap-2">
-              {categories.map((category) => (
-                <motion.button
-                  key={category.id}
-                  onClick={() => setActiveCategory(category.id)}
-                  whileHover={{ y: -2 }}
-                  whileTap={{ y: 0 }}
-                  className={`px-4 py-2 rounded-full text-sm font-medium ${
-                    activeCategory === category.id
-                      ? "bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300"
-                      : "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300"
-                  }`}
-                >
-                  {category.name}
-                </motion.button>
-              ))}
-            </div>
+            <h2 className="text-2xl font-bold mb-4">Tools & Resources</h2>
           </div>
 
           {/* Featured Tools */}
@@ -337,8 +312,9 @@ export default function DashboardPage() {
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                   className="w-full py-2 bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 rounded-lg text-sm font-medium text-blue-700 dark:text-blue-300 flex items-center justify-center"
+                  onClick={() => trackActivity("Resume Builder", "resume")}
                 >
-                  <span>Open Tool</span>
+                  <Link href="./dashboard/resumeEditor">Open Tool</Link>
                   <ChevronRight className="h-4 w-4 ml-1" />
                 </motion.button>
               </div>
@@ -372,8 +348,11 @@ export default function DashboardPage() {
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                   className="w-full py-2 bg-green-50 hover:bg-green-100 dark:bg-green-900/20 dark:hover:bg-green-900/30 rounded-lg text-sm font-medium text-green-700 dark:text-green-300 flex items-center justify-center"
+                  onClick={() =>
+                    trackActivity("Interview Simulator", "interview")
+                  }
                 >
-                  <span>Open Tool</span>
+                  <Link href="./dashboard/interview-prep">Open Tool</Link>
                   <ChevronRight className="h-4 w-4 ml-1" />
                 </motion.button>
               </div>
@@ -405,6 +384,7 @@ export default function DashboardPage() {
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                   className="w-full py-2 bg-purple-50 hover:bg-purple-100 dark:bg-purple-900/20 dark:hover:bg-purple-900/30 rounded-lg text-sm font-medium text-purple-700 dark:text-purple-300 flex items-center justify-center"
+                  onClick={() => trackActivity("Career Explorer", "career")}
                 >
                   <span>Open Tool</span>
                   <ChevronRight className="h-4 w-4 ml-1" />
@@ -414,98 +394,112 @@ export default function DashboardPage() {
           </motion.div>
 
           {/* Resources Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Interview Resources */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Statistics Cards */}
             <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6"
+              variants={itemVariants}
+              className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl shadow-lg p-6 text-white"
             >
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-semibold">Interview Resources</h2>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="text-sm text-blue-600 dark:text-blue-400 flex items-center"
-                >
-                  View All
-                  <ChevronRight className="h-4 w-4 ml-1" />
-                </motion.button>
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-blue-100">Applications Submitted</p>
+                  <h3 className="text-3xl font-bold mt-2">24</h3>
+                </div>
+                <div className="p-3 bg-blue-400/30 rounded-lg">
+                  <Send className="h-6 w-6" />
+                </div>
               </div>
-
-              <div className="space-y-4">
-                {interviewResources.map((resource, index) => (
-                  <motion.div
-                    key={resource.id}
-                    variants={itemVariants}
-                    className="flex items-start p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
-                  >
-                    <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/30 mr-4">
-                      <resource.icon className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="font-medium">{resource.name}</h3>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
-                        {resource.description}
-                      </p>
-                    </div>
-                    <motion.button
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
-                    >
-                      <ExternalLink className="h-4 w-4 text-gray-500 dark:text-gray-400" />
-                    </motion.button>
-                  </motion.div>
-                ))}
+              <div className="mt-4 flex items-center text-blue-100">
+                <ArrowUp className="h-4 w-4 mr-1" />
+                <span>12% from last week</span>
               </div>
             </motion.div>
 
-            {/* Learning Resources */}
+            <motion.div
+              variants={itemVariants}
+              className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl shadow-lg p-6 text-white"
+            >
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-purple-100">Interview Invites</p>
+                  <h3 className="text-3xl font-bold mt-2">8</h3>
+                </div>
+                <div className="p-3 bg-purple-400/30 rounded-lg">
+                  <Calendar className="h-6 w-6" />
+                </div>
+              </div>
+              <div className="mt-4 flex items-center text-purple-100">
+                <ArrowUp className="h-4 w-4 mr-1" />
+                <span>3 upcoming this week</span>
+              </div>
+            </motion.div>
+
+            <motion.div
+              variants={itemVariants}
+              className="bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl shadow-lg p-6 text-white"
+            >
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-emerald-100">Profile Strength</p>
+                  <h3 className="text-3xl font-bold mt-2">92%</h3>
+                </div>
+                <div className="p-3 bg-emerald-400/30 rounded-lg">
+                  <Trophy className="h-6 w-6" />
+                </div>
+              </div>
+              <div className="mt-4 flex items-center text-emerald-100">
+                <Star className="h-4 w-4 mr-1" />
+                <span>Almost complete!</span>
+              </div>
+            </motion.div>
+
+            {/* Activity Timeline */}
             <motion.div
               variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6"
+              className="lg:col-span-3 bg-white dark:bg-gray-800 rounded-xl shadow-md p-6"
             >
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-semibold">Learning Resources</h2>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="text-sm text-blue-600 dark:text-blue-400 flex items-center"
-                >
-                  View All
-                  <ChevronRight className="h-4 w-4 ml-1" />
-                </motion.button>
-              </div>
-
-              <div className="space-y-4">
-                {learningResources.map((resource, index) => (
-                  <motion.div
-                    key={resource.id}
-                    variants={itemVariants}
-                    className="flex items-start p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
-                  >
-                    <div className="p-2 rounded-lg bg-green-100 dark:bg-green-900/30 mr-4">
-                      <resource.icon className="h-5 w-5 text-green-600 dark:text-green-400" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="font-medium">{resource.name}</h3>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
-                        {resource.description}
-                      </p>
-                    </div>
-                    <motion.button
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+              <h2 className="text-xl font-semibold mb-6">Recent Activity</h2>
+              <div className="space-y-6">
+                {recentActivities.length === 0 ? (
+                  <div className="text-gray-500 dark:text-gray-400">
+                    No recent activities
+                  </div>
+                ) : (
+                  recentActivities.slice(0, 3).map((activity, index) => (
+                    <motion.div
+                      key={index}
+                      variants={itemVariants}
+                      className="flex items-center space-x-4"
                     >
-                      <ExternalLink className="h-4 w-4 text-gray-500 dark:text-gray-400" />
-                    </motion.button>
-                  </motion.div>
-                ))}
+                      <div
+                        className={`p-3 rounded-full ${
+                          activity.type === "resume"
+                            ? "bg-blue-100 dark:bg-blue-900/30"
+                            : activity.type === "interview"
+                            ? "bg-green-100 dark:bg-green-900/30"
+                            : "bg-purple-100 dark:bg-purple-900/30"
+                        }`}
+                      >
+                        {activity.type === "resume" ? (
+                          <FileText className="h-5 w-5 text-blue-500" />
+                        ) : activity.type === "interview" ? (
+                          <Video className="h-5 w-5 text-green-500" />
+                        ) : (
+                          <Briefcase className="h-5 w-5 text-purple-500" />
+                        )}
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="font-medium dark:text-gray-200">
+                          {activity.title}
+                        </h3>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                          {new Date(activity.timestamp).toLocaleString()}
+                        </p>
+                      </div>
+                      <ChevronRight className="h-5 w-5 text-gray-400" />
+                    </motion.div>
+                  ))
+                )}
               </div>
             </motion.div>
           </div>

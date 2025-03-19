@@ -24,7 +24,7 @@ const ResumeForm = (props: any) => {
 
   return (
     <>
-      <div className="flex flex-col lexend-400 dark:bg-gray-900 min-h-screen justify-between pt-16  mt-10">
+      <div className="flex flex-col lexend-400 dark:bg-gray-950 dark:backdrop-blur-md p-16 justify-between transition-all duration-300">
         {/* Main Section */}
         <main className="grow px-3 sm:px-6 py-4 w-full">
           <div className="w-full">
@@ -42,16 +42,16 @@ const ResumeForm = (props: any) => {
 
             {/* Step indicator for mobile */}
             <div className="lg:hidden text-center mb-3">
-              <p className="text-sm font-medium dark:text-gray-300">
+              <p className="text-sm font-medium dark:text-gray-300/90">
                 Step {steps.findIndex((step) => step.key === currentStep) + 1}
                 of {steps.length}
               </p>
-              <h3 className="text-base font-bold dark:text-white">
+              <h3 className="text-base font-bold dark:text-white/90">
                 {steps.find((step) => step.key === currentStep)?.title}
               </h3>
             </div>
 
-            <div className="overflow-y-auto h-[50vh] sm:h-[55vh] md:h-[60vh] dark:bg-gray-800 bg-white rounded-lg shadow-md p-4 border dark:border-gray-700 w-full sm:w-4/5 md:w-3/4 lg:w-3/5 mx-auto">
+            <div className="overflow-y-auto h-[50vh] sm:h-[55vh] md:h-[60vh] dark:bg-gray-800/70 dark:backdrop-blur-sm bg-white rounded-lg shadow-md p-4 border dark:border-gray-700/50 w-full sm:w-4/5 md:w-3/4 lg:w-3/5 mx-auto transition-all duration-300">
               {FormComponent && (
                 <FormComponent
                   resumeData={resumeData}
@@ -69,7 +69,7 @@ const ResumeForm = (props: any) => {
               <div className="flex items-center gap-2 w-full">
                 <Button
                   variant={"secondary"}
-                  className="w-1/2 sm:w-auto text-xs sm:text-sm dark:bg-gray-700 dark:hover:bg-gray-600"
+                  className="w-1/2 sm:w-auto text-xs sm:text-sm dark:bg-gray-700/80 dark:hover:bg-gray-600/80 transition-colors duration-300"
                   onClick={() => {
                     const currentIndex = steps.findIndex(
                       (step) => step.key === currentStep
@@ -108,7 +108,7 @@ const ResumeForm = (props: any) => {
                     props.setEditor(!props.Editor);
                   }}
                   variant={"secondary"}
-                  className="w-full sm:w-auto text-xs sm:text-sm dark:bg-gray-700 dark:hover:bg-gray-600"
+                  className="w-full sm:w-auto text-xs sm:text-sm dark:bg-gray-700/80 dark:hover:bg-gray-600/80 transition-colors duration-300"
                 >
                   Close
                 </Button>

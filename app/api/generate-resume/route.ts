@@ -5,6 +5,7 @@ import { ResumeSchemaVals } from "@/lib/FormSchema";
 
 // Initialize the Google Generative AI with your API key from environment variables
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 export async function POST(req: NextRequest) {
   try {
@@ -54,7 +55,6 @@ export async function POST(req: NextRequest) {
       : "";
 
     // Generate professional summary using Gemini 1.5 Flash model
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     const prompt = `Generate a professional summary for a resume with the following details:
       Name: ${name}
