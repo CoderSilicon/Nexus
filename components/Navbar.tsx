@@ -50,7 +50,7 @@ const Navbar = () => {
     { href: "/", label: "Home" },
     { href: "/pricing", label: "Pricing" },
     { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
+    { href: "/docs", label: "Documentation", icon: Briefcase },
   ];
 
   const dashboardNavLinks: NavLink[] = [

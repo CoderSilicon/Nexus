@@ -60,7 +60,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
           >
-            Read Docs
+            <Link href="/docs">Read Docs</Link>
           </motion.button>
         </div>
       </div>
