@@ -100,7 +100,7 @@ const AboutPage = () => {
             <Card className="flex flex-col h-full bg-white dark:bg-slate-700 shadow-lg transition-all hover:scale-105">
               <div className="p-6 flex-1 flex flex-col items-center">
                 <Brain className="w-12 h-12 text-blue-600 dark:text-blue-400 mb-4" />
-                <CardHeader className=" space-y-1">
+                <CardHeader className="p-0 space-y-1">
                   <CardTitle className="text-xl font-bold text-slate-800 dark:text-slate-100 text-center">
                     AI-Powered Insights
                   </CardTitle>
