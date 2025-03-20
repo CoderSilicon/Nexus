@@ -55,8 +55,8 @@ const Navbar = () => {
 
   const dashboardNavLinks: NavLink[] = [
     { href: "/dashboard", label: "Dashboard", icon: User },
-    { href: "/dashboard/insights", label: "Industry Insights", icon: BookOpen },
-    { href: "/dashboard/resume", label: "Resume Builder", icon: Briefcase },
+    { href: "/", label: "Home", icon: BookOpen },
+    { href: "/docs", label: "Documentation", icon: Briefcase },
   ];
 
   const navLinks = isDashboard ? dashboardNavLinks : homeNavLinks;
@@ -94,10 +94,27 @@ const Navbar = () => {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition-colors flex items-center gap-1"
+                  className={`
+                  flex items-center gap-2 px-3 py-2 rounded-lg
+                  transition-all duration-200 ease-in-out
+                  ${
+                    pathname === link.href
+                      ? "text-blue-600 bg-blue-50 dark:text-blue-400 dark:bg-gray-800"
+                      : "text-gray-700 hover:text-blue-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:text-blue-400 dark:hover:bg-gray-800"
+                  }
+                  `}
                 >
-                  {link.icon && <link.icon size={16} />}
-                  {link.label}
+                  {link.icon && (
+                    <link.icon
+                      size={18}
+                      className={`${
+                        pathname === link.href
+                          ? "text-blue-600 dark:text-blue-400"
+                          : ""
+                      }`}
+                    />
+                  )}
+                  <span className="font-medium">{link.label}</span>
                 </Link>
               ))}
             </div>
@@ -112,6 +129,7 @@ const Navbar = () => {
 
               {isSignedIn ? (
                 <div className="flex items-center space-x-4">
+                  {" "}
                   {!isDashboard && (
                     <Link
                       href="/dashboard"
@@ -120,8 +138,15 @@ const Navbar = () => {
                       Dashboard
                     </Link>
                   )}
-                  <div className="relative h-8 w-8 overflow-hidden rounded-full">
-                    <UserButton afterSignOutUrl="/" />
+                  <div className="flex items-center space-x-4">
+                    <SignOutButton>
+                      <button className="px-4 py-2 rounded-lg text-red-600 border border-red-600 hover:bg-red-50 dark:text-red-400 dark:border-red-400 dark:hover:bg-gray-800 transition-colors">
+                        Sign Out
+                      </button>
+                    </SignOutButton>
+                    <div className="relative h-8 w-8 overflow-hidden rounded-full">
+                      <UserButton />
+                    </div>
                   </div>
                 </div>
               ) : (
@@ -154,7 +179,7 @@ const Navbar = () => {
 
             {isSignedIn && (
               <div className="relative h-8 w-8 overflow-hidden rounded-full mr-2">
-                <UserButton afterSignOutUrl="/" />
+                <UserButton />
               </div>
             )}
 
@@ -195,22 +220,11 @@ const Navbar = () => {
                       Go to Dashboard
                     </Link>
                   )}
-                  <button
-                    className="px-4 py-2 rounded-lg text-red-600 border border-red-600 hover:bg-red-50 dark:text-red-400 dark:border-red-400 dark:hover:bg-gray-800 transition-colors w-full"
-                    onClick={() => {
-                      setIsOpen(false);
-                      document
-                        .querySelector("[data-clerk-sign-out]")
-                        ?.dispatchEvent(
-                          new MouseEvent("click", { bubbles: true })
-                        );
-                    }}
-                  >
-                    Sign Out
-                  </button>
-                  <div className="hidden">
-                    <SignOutButton />
-                  </div>
+                  <SignOutButton>
+                    <span className="px-4 py-2 rounded-lg text-red-600 border border-red-600 hover:bg-red-50 dark:text-red-400 dark:border-red-400 dark:hover:bg-gray-800 transition-colors w-full block text-center cursor-pointer">
+                      Sign Out
+                    </span>
+                  </SignOutButton>
                 </>
               ) : (
                 <>

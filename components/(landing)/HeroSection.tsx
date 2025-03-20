@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 const HeroSection = () => {
   return (
@@ -51,7 +52,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
           >
-            Get Started!
+            <Link href="/dashboard">Get Started!</Link>
           </motion.button>
           <motion.button
             className="px-6 py-3 text-lg font-semibold text-black dark:text-white border-2 border-slate-950 dark:border-slate-200 rounded-xl shadow-md transform hover:scale-105 transition duration-300 ease-in-out w-full sm:w-auto"

@@ -1,82 +1,61 @@
 "use client";
 
-import InterviewTestPage from "@/components/InterviewQuiz";
-import InterviewFlash from "@/components/InterviewFlash";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
-import { useUser } from "@clerk/nextjs";
+import LearningForm from "@/components/LearningForm";
 import {
   BookOpen,
-  FileQuestion,
-  Brain,
+  GraduationCap,
+  Library,
+  Lightbulb,
   Target,
-  Clock,
-  Users,
   ArrowLeft,
+  Plus,
 } from "lucide-react";
 
 const Page = () => {
-  const [view, setView] = useState<"main" | "selection" | "test" | "flashcard">(
-    "main"
-  );
-  const [isReturningUser, setIsReturningUser] = useState(false);
+  const [view, setView] = useState<"main" | "add" | "resources">("main");
   const router = useRouter();
-  const { user } = useUser();
-
-  // Get first name or username
-  const userName = user?.firstName || user?.username || "there";
-
-  useEffect(() => {
-    // Check if user has visited before
-    const hasVisited = localStorage.getItem(`hasVisited_${user?.id}`);
-    if (hasVisited) {
-      setIsReturningUser(true);
-    } else {
-      // Set the flag for future visits
-      localStorage.setItem(`hasVisited_${user?.id}`, "true");
-      setIsReturningUser(false);
-    }
-  }, [user?.id]);
 
   const stats = [
     {
-      number: "500+",
-      label: "Practice Questions",
-      icon: <Brain className="h-6 w-6 text-purple-500 dark:text-purple-400" />,
-      description: "Comprehensive question bank",
+      number: "15+",
+      label: "Learning Paths",
+      icon: <Target className="h-6 w-6 text-purple-500 dark:text-purple-400" />,
+      description: "Personalized learning journeys",
     },
     {
-      number: "10+",
-      label: "Topic Categories",
-      icon: <Target className="h-6 w-6 text-blue-500 dark:text-blue-400" />,
-      description: "Focused learning paths",
+      number: "100+",
+      label: "Resources",
+      icon: <Library className="h-6 w-6 text-blue-500 dark:text-blue-400" />,
+      description: "Curated learning materials",
     },
     {
       number: "24/7",
       label: "Available",
-      icon: <Clock className="h-6 w-6 text-green-500 dark:text-green-400" />,
-      description: "Practice anytime, anywhere",
+      icon: <BookOpen className="h-6 w-6 text-green-500 dark:text-green-400" />,
+      description: "Learn at your own pace",
     },
   ];
 
   const features = [
     {
-      icon: (
-        <FileQuestion className="h-8 w-8 text-blue-600 dark:text-blue-400" />
-      ),
-      title: "Test-Based Practice",
+      icon: <Plus className="h-8 w-8 text-blue-600 dark:text-blue-400" />,
+      title: "Add Learning Resource",
       description:
-        "Complete structured interview questions with detailed feedback",
+        "Add a new book, course, or learning goal to track your progress",
       color: "blue",
-      onClick: () => setView("test"),
+      onClick: () => setView("add"),
     },
     {
-      icon: <BookOpen className="h-8 w-8 text-green-600 dark:text-green-400" />,
-      title: "Flashcard Practice",
-      description: "Review concepts quickly with interactive flashcards",
+      icon: (
+        <GraduationCap className="h-8 w-8 text-green-600 dark:text-green-400" />
+      ),
+      title: "View Resources",
+      description: "Browse your learning materials and track progress",
       color: "green",
-      onClick: () => setView("flashcard"),
+      onClick: () => setView("resources"),
     },
   ];
 
@@ -84,10 +63,10 @@ const Page = () => {
     <div className="flex flex-col items-center space-y-8 w-full max-w-4xl mx-auto">
       <div className="text-center space-y-3">
         <h2 className="text-3xl font-bold text-gray-800 dark:text-white">
-          Choose Your Learning Style
+          Choose an Action
         </h2>
         <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-          Select the practice mode that best suits your learning preferences
+          Add new learning resources or view your existing materials
         </p>
       </div>
 
@@ -138,25 +117,11 @@ const Page = () => {
           <div className="w-full space-y-12 px-4 sm:px-8">
             <div className="text-center space-y-4">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-800 dark:text-white mb-4 tracking-tight">
-                {isReturningUser ? (
-                  <span className="flex items-center justify-center gap-2">
-                    Welcome back, {userName}!{" "}
-                    <span className="animate-wave">👋</span>
-                  </span>
-                ) : (
-                  <span className="flex items-center justify-center gap-2">
-                    Hi there, {userName}!{" "}
-                    <span className="animate-bounce">✨</span>
-                  </span>
-                )}
+                Your Learning Journey
               </h1>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 dark:text-white mb-4 tracking-tight">
-                Ace Your Technical Interview
-              </h2>
               <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                {isReturningUser
-                  ? "Ready to continue your interview preparation journey?"
-                  : "Master the art of technical interviews through interactive practice and real-time feedback"}
+                Track your progress, discover resources, and achieve your
+                learning goals
               </p>
             </div>
 
@@ -183,10 +148,10 @@ const Page = () => {
 
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
               <Button
-                onClick={() => setView("selection")}
+                onClick={() => setView("add")}
                 className="w-full sm:w-auto text-lg px-8 py-6 h-auto font-semibold"
               >
-                Start Practice
+                Get Started
               </Button>
               <Button
                 variant="outline"
@@ -199,19 +164,36 @@ const Page = () => {
           </div>
         )}
 
-        {view === "selection" && renderSelectionScreen()}
-
-        {view === "test" && (
+        {view === "add" && (
           <div className="w-full px-4 sm:px-8">
-            <InterviewTestPage
-              Editor={true}
-              setEditor={() => setView("main")}
-            />
+            <div className="mb-8">
+              <Button
+                variant="outline"
+                onClick={() => setView("main")}
+                className="flex items-center gap-2"
+              >
+                <ArrowLeft className="h-4 w-4" /> Back
+              </Button>
+            </div>
+            <LearningForm />
           </div>
         )}
-        {view === "flashcard" && (
+
+        {view === "resources" && (
           <div className="w-full px-4 sm:px-8">
-            <InterviewFlash setView={setView} />
+            <div className="mb-8">
+              <Button
+                variant="outline"
+                onClick={() => setView("main")}
+                className="flex items-center gap-2"
+              >
+                <ArrowLeft className="h-4 w-4" /> Back
+              </Button>
+            </div>
+            {/* Add your resources view component here */}
+            <div className="text-center text-gray-600 dark:text-gray-300">
+              Resources view coming soon...
+            </div>
           </div>
         )}
       </div>
