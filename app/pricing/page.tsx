@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Check } from "lucide-react";
+import { Check, Link } from "lucide-react";
 
 export default function PricingPage() {
   const features = [
@@ -66,7 +66,9 @@ export default function PricingPage() {
                 </div>
               </CardContent>
               <CardFooter>
-                <Button className="w-full text-lg h-12">Get Started Now</Button>
+                <Button className="w-full text-lg h-12">
+                  <Link href="/dashboard">Get Started Now</Link>
+                </Button>
               </CardFooter>
             </Card>
 
