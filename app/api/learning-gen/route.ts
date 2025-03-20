@@ -71,7 +71,7 @@ Requirements:
 4. Estimate realistic durations for reading/completing each ${type}
 5. Return ONLY valid JSON without any markdown or text formatting
 6. IMPORTANT: Every resource MUST be of type "${type}" - do not include any other types of resources
-7. IMPORTANT: The link MUST be
+7. IMPORTANT: The link MUST be valid and accessible and not a placeholder but make sure to double check the link before returning it
 `;
 
     // Generate content
